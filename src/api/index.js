@@ -1,17 +1,34 @@
 import { API_URL } from '../config';
 
-export const login = async (user) => {
+export const loginApi = async () => {
   const response = await fetch(`${API_URL}/auth/login`, {
     method: 'POST',
-    body: JSON.stringify(user),
+    body: JSON.stringify({
+      username: 'atuny0',
+      password: '9uQFF1Lh',
+    }),
     headers: {
-      'Content-type': 'application/json; charset=UTF-8',
+      'Content-type': 'application/json',
     },
   });
   return await response.json();
 };
 
-export const getPosts = async () => {
+export const signupApi = async () => {
+  const response = await fetch(`${API_URL}/auth/login`, {
+    method: 'POST',
+    body: JSON.stringify({
+      username: 'atuny0',
+      password: '9uQFF1Lh',
+    }),
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
+  return await response.json();
+};
+
+export const getPostsApi = async () => {
   const response = await fetch(`${API_URL}/posts`, {
     method: 'GET',
   });
@@ -19,19 +36,19 @@ export const getPosts = async () => {
 };
 
 // Create a post
-export const createPost = async (post) => {
+export const createPostApi = async (post) => {
   const response = await fetch(`${API_URL}/posts`, {
     method: 'POST',
     body: JSON.stringify(post),
     headers: {
-      'Content-type': 'application/json; charset=UTF-8',
+      'Content-type': 'application/json',
     },
   });
   return await response.json();
 };
 
 // Get a single post
-export const getSinglePost = async (id) => {
+export const getSinglePostApi = async (id) => {
   const response = await fetch(`${API_URL}/${id}`, {
     method: 'GET',
   });
@@ -39,19 +56,19 @@ export const getSinglePost = async (id) => {
 };
 
 // Update a post
-export const updatePost = async (id, post) => {
+export const updatePostApi = async (id, post) => {
   const response = await fetch(`${API_URL}/${id}`, {
     method: 'PUT',
     body: JSON.stringify(post),
     headers: {
-      'Content-type': 'application/json; charset=UTF-8',
+      'Content-type': 'application/json',
     },
   });
   return await response.json();
 };
 
 // Delete a post
-export const deletePost = async (id) => {
+export const deletePostApi = async (id) => {
   const response = await fetch(`${API_URL}/${id}`, {
     method: 'DELETE',
   });

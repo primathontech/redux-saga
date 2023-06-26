@@ -1,6 +1,32 @@
 import { Formik } from 'formik';
+import { useDispatch } from 'react-redux';
+import { logInAction } from '../../store/auth/action';
 
 const Login = () => {
+  const dispatch = useDispatch();
+
+  const validator = (values) => {
+    const errors = {};
+
+    if (!values.username) {
+      errors.username = 'Required';
+    }
+
+    if (!values.password) {
+      errors.password = 'Required';
+    } else if (values.password.length < 8) {
+      errors.password = 'Must be 8 characters or more';
+    }
+
+    return errors;
+  };
+
+  const onSubmit = (values, { setSubmitting }) => {
+    setSubmitting(true);
+    dispatch(logInAction(values));
+    setSubmitting(false);
+  };
+
   const checkAllAvailabilityProperties = (formikProps) => {
     const {
       values,
@@ -21,7 +47,7 @@ const Login = () => {
             Username:
             <br />
             <input
-              type='email'
+              type='text'
               name='username'
               autoComplete='username'
               onChange={handleChange}
@@ -65,24 +91,6 @@ const Login = () => {
         </div>
       </form>
     );
-  };
-
-  const validator = (values) => {
-    const errors = {};
-    if (!values.username) {
-      errors.username = 'Required';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.username)) {
-      errors.username = 'Invalid username address';
-    }
-    return errors;
-  };
-
-  const onSubmit = (values, { setSubmitting }) => {
-    setSubmitting(true);
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
-      setSubmitting(false);
-    }, 400);
   };
 
   return (

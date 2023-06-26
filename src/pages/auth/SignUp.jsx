@@ -1,6 +1,47 @@
 import { Formik } from 'formik';
+import { useDispatch } from 'react-redux';
+import { signUpAction } from '../../store/auth/action';
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+
+  const validator = (values) => {
+    const errors = {};
+    if (!values.firstName) {
+      errors.firstName = 'Required';
+    }
+
+    if (!values.lastName) {
+      errors.lastName = 'Required';
+    }
+
+    if (!values.email) {
+      errors.email = 'Required';
+    }
+
+    if (!values.gender) {
+      errors.gender = 'Required';
+    }
+
+    if (!values.username) {
+      errors.username = 'Required';
+    }
+
+    if (!values.password) {
+      errors.password = 'Required';
+    } else if (values.password.length < 8) {
+      errors.password = 'Must be 8 characters or more';
+    }
+
+    return errors;
+  };
+
+  const onSubmit = (values, { setSubmitting }) => {
+    setSubmitting(true);
+    dispatch(signUpAction(values));
+    setSubmitting(false);
+  };
+
   const checkAllAvailabilityProperties = (formikProps) => {
     const {
       values,
@@ -18,18 +59,73 @@ const SignUp = () => {
       <form onSubmit={handleSubmit}>
         <div className='mb-4'>
           <label className='my-4'>
-            Full Name:
+            First Name:
             <br />
             <input
               type='text'
-              name='name'
+              name='firstName'
+              autoComplete='firstName'
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.name}
+              value={values.firstName}
               className='px-2 py-1 border rounded border-green-500 w-full'
             />
           </label>
-          {errors.name && touched.name && <span className='text-red-500 text-sm'>{errors.name}</span>}
+          {errors.firstName && touched.firstName && <span className='text-red-500 text-sm'>{errors.firstName}</span>}
+        </div>
+
+        <div className='mb-4'>
+          <label className='my-4'>
+            Last Name:
+            <br />
+            <input
+              type='text'
+              name='lastName'
+              autoComplete='lastName'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.lastName}
+              className='px-2 py-1 border rounded border-green-500 w-full'
+            />
+          </label>
+          {errors.lastName && touched.lastName && <span className='text-red-500 text-sm'>{errors.lastName}</span>}
+        </div>
+
+        <div className='mb-4'>
+          <label className='my-4'>
+            Gender
+            <br />
+            <select
+              name='gender'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.gender}
+              className='px-2 py-1 border rounded border-green-500 w-full'
+            >
+              <option value=''>None</option>
+              <option value='male'>Male</option>
+              <option value='female'>Female</option>
+              <option value='other'>Other</option>
+            </select>
+          </label>
+          {errors.gender && touched.gender && <span className='text-red-500 text-sm'>{errors.gender}</span>}
+        </div>
+
+        <div className='mb-4'>
+          <label className='my-4'>
+            Email:
+            <br />
+            <input
+              type='email'
+              name='email'
+              autoComplete='email'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.email}
+              className='px-2 py-1 border rounded border-green-500 w-full'
+            />
+          </label>
+          {errors.email && touched.email && <span className='text-red-500 text-sm'>{errors.email}</span>}
         </div>
 
         <div className='mb-4'>
@@ -37,12 +133,12 @@ const SignUp = () => {
             Username:
             <br />
             <input
-              type='email'
+              type='text'
               name='username'
+              autoComplete='username'
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.username}
-              autoComplete='username'
               className='px-2 py-1 border rounded border-green-500 w-full'
             />
           </label>
@@ -70,44 +166,26 @@ const SignUp = () => {
           <button
             type='reset'
             onClick={resetForm}
-            className='flex-1 border px-12 py-2 rounded border-green-500 text-green-500'
+            className='flex-1 border py-2 rounded border-green-500 text-green-500'
           >
             Clear
           </button>
 
-          <button
-            type='submit'
-            className='flex-1 border px-12 py-2 rounded bg-green-500 text-white'
-            disabled={isSubmitting}
-          >
-            Sign up
+          <button type='submit' className='flex-1 border py-2 rounded bg-green-500 text-white' disabled={isSubmitting}>
+            Login
           </button>
         </div>
       </form>
     );
   };
 
-  const validator = (values) => {
-    const errors = {};
-    if (!values.username) {
-      errors.username = 'Required';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.username)) {
-      errors.username = 'Invalid username address';
-    }
-    return errors;
-  };
-
-  const onSubmit = (values, { setSubmitting }) => {
-    setSubmitting(true);
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
-      setSubmitting(false);
-    }, 400);
-  };
-
   return (
     <div className='m-4'>
-      <Formik initialValues={{ name: '', username: '', password: '' }} validate={validator} onSubmit={onSubmit}>
+      <Formik
+        initialValues={{ firstName: '', lastName: '', gender: '', email: '', username: '', password: '' }}
+        validate={validator}
+        onSubmit={onSubmit}
+      >
         {checkAllAvailabilityProperties}
       </Formik>
     </div>
