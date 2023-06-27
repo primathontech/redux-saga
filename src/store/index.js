@@ -11,6 +11,7 @@ const sagaMiddleware = createSagaMiddleware();
 const store = configureStore({
   reducer: rootReducer, // this was the missing piece
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
+  devTools: true,
 });
 
 // then run the saga

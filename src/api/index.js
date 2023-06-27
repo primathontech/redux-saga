@@ -1,6 +1,6 @@
 import { API_URL } from '../config';
 
-export const loginApi = async () => {
+export const loginApi = async (payload) => {
   const response = await fetch(`${API_URL}/auth/login`, {
     method: 'POST',
     body: JSON.stringify({

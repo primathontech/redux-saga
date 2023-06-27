@@ -2,10 +2,13 @@
 export const SIGN_UP_ACTION = 'SIGN_UP_ACTION';
 export const SIGN_UP_SUCCESS = `${SIGN_UP_ACTION}_SUCCESS`;
 export const SIGN_UP_FAILURE = `${SIGN_UP_ACTION}_FAILURE`;
+
 export const LOG_IN_ACTION = 'LOG_IN_ACTION';
 export const LOG_IN_SUCCESS = `${LOG_IN_ACTION}_SUCCESS`;
 export const LOG_IN_FAILURE = `${LOG_IN_ACTION}_FAILURE`;
+
 export const LOG_OUT_ACTION = 'LOG_OUT_ACTION';
+export const LOG_OUT_SUCCESS = `${LOG_OUT_ACTION}_SUCCESS`;
 
 // Action Creators
 export const signUpAction = (payload) => ({
@@ -40,4 +43,8 @@ export const logInFailureAction = (payload) => ({
 
 export const logOutAction = () => ({
   type: LOG_OUT_ACTION,
+});
+
+export const logOutSuccessAction = () => ({
+  type: LOG_OUT_SUCCESS,
 });

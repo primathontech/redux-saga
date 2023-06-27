@@ -24,6 +24,10 @@ const Login = () => {
   const onSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
     dispatch(logInAction(values));
+    // dispatch({
+    //   type: LOG_IN_ACTION,
+    //   payload: payload,
+    // });
     setSubmitting(false);
   };
 

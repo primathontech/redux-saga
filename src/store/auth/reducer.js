@@ -1,12 +1,14 @@
-import { SIGN_UP_SUCCESS, SIGN_UP_FAILURE, LOG_IN_FAILURE, LOG_IN_SUCCESS, LOG_OUT_ACTION } from './action';
+import { localStorageUtils } from '../../utils';
+import { SIGN_UP_SUCCESS, SIGN_UP_FAILURE, LOG_IN_FAILURE, LOG_IN_SUCCESS, LOG_OUT_SUCCESS } from './action';
 
 export const INITIAL_STATE = {
-  token: null,
+  token: localStorageUtils.getItem(localStorageUtils.TOKEN_KEY),
   verified: false,
-  user: {},
+  user: localStorageUtils.getItem(localStorageUtils.USER_KEY) || {},
 };
 
 const reducer = (state = INITIAL_STATE, { type, payload }) => {
+  console.log('reducer', { type, payload });
   switch (type) {
     case SIGN_UP_SUCCESS:
       return { ...state, ...{ ...payload, verified: true } };
@@ -16,8 +18,8 @@ const reducer = (state = INITIAL_STATE, { type, payload }) => {
       return { ...state, ...{ ...payload, verified: true } };
     case LOG_IN_FAILURE:
       return { ...INITIAL_STATE, verified: false };
-    case LOG_OUT_ACTION:
-      return { ...INITIAL_STATE };
+    case LOG_OUT_SUCCESS:
+      return { ...INITIAL_STATE, verified: false };
     default:
       return state;
   }
