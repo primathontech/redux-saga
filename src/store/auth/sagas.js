@@ -19,7 +19,7 @@ export function* logInSaga(action) {
     // api call from saga
     const response = yield call(loginApi, payload);
     console.log('logInSaga response', response);
-    const { id, email, gender, firstName, lastName, image, token, message } = response;
+    const { id, email, gender, firstName, lastName, image, token, message, username } = response;
     if (message) {
       yield put(logInFailureAction(message));
     } else {
