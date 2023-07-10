@@ -37,7 +37,8 @@ export const getPostsApi = async () => {
 
 // Create a post
 export const createPostApi = async (post) => {
-  const response = await fetch(`${API_URL}/posts`, {
+  console.log('createPostApi - ', post);
+  const response = await fetch(`${API_URL}/posts/add`, {
     method: 'POST',
     body: JSON.stringify(post),
     headers: {
