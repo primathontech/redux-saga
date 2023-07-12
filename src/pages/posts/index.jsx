@@ -25,8 +25,8 @@ const Posts = () => {
         </a>
       </div>
       <section>
-        {posts.map((post) => (
-          <PostCard data={post} key={post.id} />
+        {posts.map((post, i) => (
+          <PostCard data={post} key={i} />
         ))}
       </section>
     </>

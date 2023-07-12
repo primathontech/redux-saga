@@ -50,7 +50,7 @@ export const createPostApi = async (post) => {
 
 // Get a single post
 export const getSinglePostApi = async (id) => {
-  const response = await fetch(`${API_URL}/${id}`, {
+  const response = await fetch(`${API_URL}/posts/${id}`, {
     method: 'GET',
   });
   return await response.json();
@@ -58,7 +58,7 @@ export const getSinglePostApi = async (id) => {
 
 // Update a post
 export const updatePostApi = async (id, post) => {
-  const response = await fetch(`${API_URL}/${id}`, {
+  const response = await fetch(`${API_URL}/posts/${id}`, {
     method: 'PUT',
     body: JSON.stringify(post),
     headers: {

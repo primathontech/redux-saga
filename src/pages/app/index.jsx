@@ -24,7 +24,7 @@ const App = () => {
       /posts/1/edit
       /posts/2/edit
       /posts/3/edit
-      /posts/4/edit
+      /posts/400000/edit
       */}
       <Route exact path='/posts/:postId/edit' element={<EditPost />} />
       <Route exact path='/posts/create' element={<CreatePost />} />

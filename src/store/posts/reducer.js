@@ -1,4 +1,12 @@
-import { GET_POST_SUCCESS, GET_POST_FAILURE, CREATE_POST_SUCCESS, CREATE_POST_FAILURE } from './action';
+import {
+  GET_POST_SUCCESS,
+  GET_POST_FAILURE,
+  CREATE_POST_SUCCESS,
+  CREATE_POST_FAILURE,
+  UPDATE_POST_SUCCESS,
+  UPDATE_POST_FAILURE,
+  RESET_UPDATE_POST_ERROR,
+} from './action';
 
 export const INITIAL_STATE = {
   limit: 0,
@@ -6,7 +14,8 @@ export const INITIAL_STATE = {
   skip: 0,
   total: 0,
   error: '',
-  createPostError: null,
+  createPostError: null, // true, false or null
+  updatePostError: null, // true, false or null
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -20,6 +29,12 @@ const reducer = (state = INITIAL_STATE, action) => {
       return { ...state, posts: [payload, ...state.posts], createPostError: false };
     case CREATE_POST_FAILURE:
       return { ...state, createPostError: payload.error };
+    case UPDATE_POST_SUCCESS:
+      return { ...state, updatePostError: false };
+    case UPDATE_POST_FAILURE:
+      return { ...state, updatePostError: payload.error };
+    case RESET_UPDATE_POST_ERROR:
+      return { ...state, updatePostError: null };
     default:
       return state;
   }

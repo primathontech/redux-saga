@@ -27,20 +27,22 @@ const CreatePost = () => {
 
   useEffect(() => {
     if (createPostError) {
-      alert(createPostError);
+      // Error handling Toastify
     } else if (createPostError !== null) {
       navigator('/posts');
+      // Success handling Toastify
     }
   }, [createPostError, navigator]);
 
-  // use toastify for success and failure message to show in ui
-  // use react router dom to redirect to home page after success
-  // also implement go back
   const onSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
     console.log(values);
     dispatch(createPostAction(values));
     setSubmitting(false);
+  };
+
+  const goBack = () => {
+    navigator('/posts');
   };
 
   const checkAllAvailabilityProperties = (formikProps) => {
@@ -110,7 +112,7 @@ const CreatePost = () => {
 
   return (
     <>
-      <CreateHeader title={'Create new post'} />
+      <CreateHeader title={'Create new post'} onBackClick={goBack} />
       <div className='h-screen bg-gray-200 pt-32'>
         <div className='w-96 border rounded-md overflow-hidden bg-white mx-auto'>
           <div className='m-4'>

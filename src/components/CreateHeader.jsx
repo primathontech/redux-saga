@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const CreateHeader = (props) => {
   const newProps = {
     onBackClick: () => {},
@@ -9,6 +11,8 @@ const CreateHeader = (props) => {
   return (
     <header className='bg-blue-500 text-white'>
       <div className='container mx-auto p-4 flex items-center'>
+        {/* <a href='/'> */}
+        {/* <Link to='/' className='flex items-center'> */}
         <button onClick={onBackClick}>
           <svg
             className='w-6 h-6 mr-1'
@@ -22,6 +26,8 @@ const CreateHeader = (props) => {
         </button>
 
         <h1 className='text-2xl font-bold'>{title}</h1>
+        {/* </Link> */}
+        {/* </a> */}
       </div>
     </header>
   );

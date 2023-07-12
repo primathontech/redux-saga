@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const PostCard = (props) => {
   const { data } = props;
 
@@ -10,11 +12,17 @@ const PostCard = (props) => {
             Delete
           </button>
 
-          <a href={`/posts/${data?.id}/edit`}>
+          {/* <a href={`/posts/${data?.id}/edit`}>
             <button type='submit' className='flex-1 border p-2 rounded bg-green-500 text-white'>
               Edit post
             </button>
-          </a>
+          </a> */}
+
+          <Link to={`/posts/${data?.id}/edit`}>
+            <button type='submit' className='flex-1 border p-2 rounded bg-green-500 text-white'>
+              Edit post
+            </button>
+          </Link>
         </div>
       </div>
 
