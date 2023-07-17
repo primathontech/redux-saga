@@ -1,10 +1,16 @@
 import { useState } from 'react';
 import Login from './Login';
 import SignUp from './SignUp';
+import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Auth = () => {
   const [activeTab, setActiveTab] = useState('login');
-  return (
+  const token = useSelector((state) => state?.auth?.token);
+
+  return token ? (
+    <Navigate to='/' replace={true} />
+  ) : (
     <div className='h-screen bg-gray-200 pt-32'>
       <div className='w-96 border rounded-md overflow-hidden bg-white mx-auto'>
         <ul className='flex bg-gray-700 text-slate-300'>
